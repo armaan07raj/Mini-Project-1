@@ -18,3 +18,5 @@ Holding tenure constant, fiber optic customers are predicted to pay about $33.60
 
 ## Run locally
 streamlit run app.py
+
+https://mini-project-1-bh9nn6yupmfh2obstumxma.streamlit.app/
