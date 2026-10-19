@@ -24,7 +24,7 @@ def load_data():
     # Relative path: works on your laptop AND on Streamlit Cloud
     df = pd.read_csv("data/WA_Fn-UseC_-Telco-Customer-Churn.csv")
 
-    # Missing values are hiding: 11 rows have " " (a blank string) in TotalCharges,
+    # Missing values are hiding: 11 rows have " " (a blank string) in Total_Charges,
     # so isna() can't see them yet. Turn them into real NaN first (Week 3 slide).
     df["TotalCharges"] = df["TotalCharges"].replace(" ", np.nan)
 
@@ -35,7 +35,7 @@ def load_data():
     # Drop them: 11 rows is 0.16% of the data (rule of thumb: < 5% is fine to drop)
     df = df.dropna()
 
-    # TotalCharges was text because of the blanks. Now that they're gone, make it a number.
+    # Total_Charges was text because of the blanks. Now that they're gone, make it a number.
     df["TotalCharges"] = df["TotalCharges"].astype(float)
 
     # Derived column (required): tenure in years instead of months
@@ -51,7 +51,7 @@ df, n_rows, n_missing = load_data()
 # CHUNK 3: title (your central question)
 # ============================================================
 st.title("What drives a Telco customer's monthly bill, and do big spenders churn more?")
-st.caption("Target we predict: MonthlyCharges (dollars per month).")
+st.caption("Target we predict: Monthly Charges (dollars per month).")
 
 
 # ============================================================
@@ -103,7 +103,7 @@ tab1, tab2, tab3 = st.tabs(["Data & Cleaning", "Exploration", "Model"])
 with tab1:
     st.header("Cleaning")
     st.write("Rows in raw file:", n_rows)
-    st.write("Rows with missing TotalCharges:", n_missing)
+    st.write("Rows with missing Total Charges:", n_missing)
     st.write("Percent of rows affected:", round(n_missing / n_rows * 100, 2))
     st.markdown(
         "**Decision: drop.** Only 0.16% of rows are affected (well under 5%). All 11 are "
@@ -215,7 +215,7 @@ with tab2:
             st.pyplot(fig)
         with notes:
             st.subheader("What to notice")
-            st.caption("Tenure and MonthlyCharges are only weakly correlated. "
+            st.caption("Tenure and Monthly Charges are only weakly correlated. "
                        "tenure and tenure_years correlate at 1.0 because one is just the other divided by 12.")
 
     with v5:
@@ -272,7 +272,7 @@ def fit_models(data):
 m = fit_models(df)
 
 with tab3:
-    st.header("Predicting MonthlyCharges")
+    st.header("Predicting Monthly Charges")
     st.markdown(
         "**Split:** 80% train / 20% test (`random_state=42`). "
         "**One-hot encoded feature:** `InternetService`. "
